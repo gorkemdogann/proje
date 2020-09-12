@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block title %} Detay Sayfam {% endblock title %}
+<!--  -->
+{% block ust_icerik %}
+<!--  -->
+{% endblock ust_icerik %}
+
+<!--  -->
+{% block body %}
+
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="col-lg-8 col-lg-offset-2">
+
+            <h2 class="page-header ">
+                <a href=" {% url 'post-list' %} ">
+                    <span class="glyphicon glyphicon-circle-arrow-left "></span>
+                </a>
+                {{blog.title }}
+                <span class="pull-right"> {{ blog.get_yayin_taslak_html }}</span>
+            </h2>
+
+
+            <br> {% if blog.get_image %}
+            <div class="thumbnail">
+                <img src="{{blog.get_image}}">
+            </div>
+            {% endif %}
+
+            <h4 class="page-header "> {{blog.content|linebreaksbr }}</h4>
+
+            <p class="lead">
+                Ketegoriler: {{ blog.kategoriler.all|join:', ' }}
+                <!-- join: value istiyor sol tarafı kategoriler, sonra ayraç istiyor -->
+            </p>
+
+            <small> 
+                <span class="page-right">
+                    {{blog.date }} 
+                </span>
+            </small>
+
+            <a href="{% url 'post-delete' blog.slug %}">
+                <input type="submit" value="Sil" class="btn pull-right btn-sm btn-danger">
+            </a>
+
+            <a href="{% url 'post-update' blog.slug %}">
+                <input type="submit " value="Güncelle" class="btn pull-right btn-sm btn-success">
+            </a>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <h2 class="page-header col-lg-8 col-lg-offset-2" style="padding:10px;"> Yorumlar ({{ blog.get_blog_comment|length}})</h2>
+        <div class="col-lg-12">
+            <div class="col-lg-8 col-lg-offset-2 ">
+                {% for comment in blog.get_blog_comment %}
+
+                <p style="padding-left:10px;">
+                    <h3> {{comment.icerik|safe}} </h3>
+                </p>
+
+                <div>
+
+                    <span style="font-weight:bold"> {{comment.get_screen_name}} </span>
+                    <h6 class="pull-right"> <span class="glyphicon glyphicon-time"></span> {{ comment.comment_date|timesince }} Önce</h6>
+
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <h2 class="page-header col-lg-8 col-lg-offset-2" style="padding:10px;">
+            Yorum Ekle
+        </h2>
+
+        <form action=" {% url 'add-comment' blog.slug %} " method="post">
+            {% csrf_token %} {{form.media}} {% for field in form %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="form-group">
+                        {{field.label_tag}}
+                        <!--  -->
+                        {{field}}
+                        <!--  -->
+                        {% if field.errors %}
+                        <!--  -->
+                        {% for error in field.errors %}
+
+                        <span class="text-danger"><b> {{error}} </b></span>
+                        <!--  -->
+                        {% endfor %}
+                        <!--  -->
+                        {% else %}
+                        <!--  -->
+                        {% if field.help_text %}
+                        <!--  -->
+                        <span class="text-success"><b>{{field.help_text}}</b></span>
+                        <!--  -->
+                        {% endif %} {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="form-group">
+                        <input type="submit" value="Yorun Yap" class="pull-right col-lg-2 btn pull-right btn-sm btn-success">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+{% endblock body %}

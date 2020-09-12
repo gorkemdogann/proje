@@ -1,0 +1,880 @@
+
+Pipenv ile Django 2.2.5 Kurulum
+
+super user: grkm
+şifre: 11091993
+
+grkmdgn06@ubuntu:~/Desktop/teoman$ pipenv shell
+Launching subshell in virtual environment…
+grkmdgn06@ubuntu:~/Desktop/teoman$  . /home/grkmdgn06/.local/share/virtualenvs/teoman-oagTYDUc/bin/activate
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ pipenv install Django
+Installing Django…
+Adding Django to Pipfile's [packages]…
+✔ Installation Succeeded 
+Pipfile.lock not found, creating…
+Locking [dev-packages] dependencies…
+Locking [packages] dependencies…
+Building requirements...
+Resolving dependencies...
+✔ Success! 
+Updated Pipfile.lock (a6086c)!
+Installing dependencies from Pipfile.lock (a6086c)…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$  
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ ls
+Pipfile  Pipfile.lock
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ nano Pipfile
+
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python -m django --version
+3.0.8
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ django-admin startproject teoman .
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ ls
+manage.py  Pipfile  Pipfile.lock  teoman
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py runsever
+Unknown command: 'runsever'. Did you mean runserver?
+Type 'manage.py help' for usage.
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+July 03, 2020 - 14:52:29
+Django version 3.0.8, using settings 'teoman.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[03/Jul/2020 14:52:31] "GET / HTTP/1.1" 200 16351
+^C(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying sessions.0001_initial... OK
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ 
+
+Visual Studio Code: venv çagırmak için: pipenv shell
+
+grkmdgn06@ubuntu:~/Desktop/teoman$ pipenv shell
+Launching subshell in virtual environment…
+ . /home/grkmdgn06/.local/share/virtualenvs/teoman-oagTYDUc/bin/activate
+grkmdgn06@ubuntu:~/Desktop/teoman$  . /home/grkmdgn06/.local/share/virtualenvs/teoman-oagTYDUc/bin/activate
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ 
+
+********************************************** 
+İlk Ders Bitti..
+********************************************** 
+
+
+models.py içindeki 
+class Meta:
+        # verbose_name = "Blog'larım"
+# burda meta'da verbose_name vermemzini amcı admin sayfasında 'Blogs'
+# yazıyor s takısı alıyor. bunu engellemek için yapıyoruz..
+# verbose_name = "Blog'larım" yazdım Blog'larıms yazdı 's' takısını silmek için:
+
+
+
+********************************************** 
+Sanallaştırma (Virtualization), Konteynırlaştırma(Containers) ve Docker Nedir ?
+
+pipenv shell
+
+
+
+
+******************************************
+14. ORM Yapısı Kullanılarak Veritabanın Kayıt İşlemi
+
+python manage.py shell
+Python 3.8.2 (default, Apr 27 2020, 15:53:34) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Blog
+>>> blog = Blog()
+>>> blog.title = 'JavaScript'
+>>> blog.title()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'str' object is not callable
+>>> blog = Blog
+>>> blog.title()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'DeferredAttribute' object is not callable
+>>> blog.title
+<django.db.models.query_utils.DeferredAttribute object at 0x7fef6d8ead60>
+>>> blog.title = 'JavaScript'
+>>> blog.title
+'JavaScript'
+>>> blog.content = 'qweqwewqeqeqweqe'
+>>> blog.content
+'qweqwewqeqeqweqe'
+>>> blog.content
+'qweqwewqeqeqweqe'
+>>> blog = Blog(title='qwqeqeq', content = 'qweqweqweasd as das das dasd')
+>>> blog
+<Blog: qwqeqeq>
+>>> print(blog)
+qwqeqeq
+>>> blog.save()
+>>> blog.title = 'başlık Güncelleyelim'
+>>> blog.save()
+>>> x = Blog.objects.create(title='deneme shell', content='qweqweqweasd sfdfgdfg')
+>>> print(x)
+deneme shell
+>>> 
+
+******************************************
+15. ORM Yapısında Filter , All ve Exclude Fonksiyonu
+
+
+
+
+
+******************************************
+18. Template Değişkenleri ve Render Fonksiyonu
+
+return render(request,'blog/post-list.html', context={'teoman': selam, 'knk' : deneme})
+views.py içi
+burda gördüğümüz gibi blog/html söyledik bunu anlamasının sebebi settings. py içindeki 
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+157. satır Base dir söyledik
+
+
+    return render(request,'blog/post-list.html', context={'teoman': selam, 'knk' : deneme})
+# bu teomanı ve knk html'de çekiyoruz
+
+html'de:
+    <p>{{ teoman|length }}</p>
+bu length yazdıgımızda 30 yazıyor yani view tanımladıgımız teomanın
+30 karakterden olustugunu bize söylüyor
+
+
+    <p>{{ teoman|upper }}</p>
+bu ise tüm yazıyı büyük harfe dönüştürüyor
+
+
+    <p>{{ liste|join:'-' }} </p>
+1-2-3-4-5-6-7
+
+    <p>{{ liste|join:'*' }} </p>
+1*2*3*4*5*6*7
+
+    <p>{{ liste|join:'~' }} </p>
+1~2~3~4~5~6~7
+
+
+
+******************************************
+19. Template'de FOR ve İF Taglarinin Kullanılması
+
+
+
+
+******************************************
+25. request.GET Methodu'nun İncelenmesi
+
+link'de ? soru işaretinden sonra birşey yazıdgımız zaman bunun get ifadesi
+oldugunu anlamalıyım:
+
+tabi views.py içindeki post list te     print(request.GET)
+yazıyoruz terminalde görüntüleye bilmek için
+
+http://127.0.0.1:8000/posts/?deneme=gorkem
+bu linke gittigimizde deneme adında bir değişken var,  gorkem'de value oluyor
+terminalde her f5 ledigimde 
+<QueryDict: {'deneme': ['gorkem']}>
+yazıyor
+
+sözlük şeklinde geliyor, 
+
+    print(request.GET['deneme'])
+yazdıgımızda direk value geliyor yani gorkem
+
+http://127.0.0.1:8000/posts/
+yzdıgımızda Hata alıyoruz
+MultiValueDictKeyError at /posts/
+böyle bir key olmadıgı için deneme patladı
+
+http://127.0.0.1:8000/posts/?deneme
+yazdıgımızda posts sayfasına gitti value vermesekte gitti
+
+o yüzden böyle yapmak yerine: gelen_deger = request.GET['deneme']
+yerine:
+gelen_deger = request.GET.get('deneme')
+
+
+
+******************************************
+26. Form Sınıfından Form Oluşturmak
+
+
+
+
+
+******************************************
+28. Oluşturulan Formun View ve Templattede Kullanılması Ders -2
+
+bu video'da html'de boşlukları internet chrome consoldan ayarı gösteriyor
+
+
+  <label for="{{field.id_for_label}}" class="control-label"> {{ field.label }} </label>
+id_for_label yaptıgımızda sayfanın kutucuguna değilde sol labellarına tıklayıncada kutucuga geçiyor
+
+
+
+******************************************
+30. Oluşturulan Formun View ve Templattede Kullanılması Ders -4
+
+is_valid form'dan gelen veri doğrumu yanlışmı? onu gösteriyor
+
+
+cleaned_data : form'dan girilen verilere erişmek için, cleaned_data
+yapısını kullanıyoruz. taze veri doğrulugu geçerli verileri kullanıyoruz 
+
+
+
+
+******************************************
+32. Django Forms ;Validation (Doğrulama) , Clean_Fields Methodu Kullanımı
+
+forms.py içinde
+  eğer ahmet adında birisi giriş yaptıgında raise:fırlat ValidationError hatası ver diyoruz
+sonra view.py geliyor is_valid burda ahmet geldiginde False değeri dönüyor ve ekranın sagında yazmıyor.
+views.py içinde is_valid print ettik bakalım diye ilk ahmeti yazdıgımda False dedi
+
+[12/Jul/2020 19:43:01] "GET /iletisim/?isim=ahmet&soyisim=wewqeqwe&email=grkmdgn06%40gmail.com&icerik=dfsfmmfyunfyj HTTP/1.1" 200 3101
+False
+
+[12/Jul/2020 19:43:05] "GET /iletisim/?isim=dsf&soyisim=wewqeqwe&email=grkmdgn06%40gmail.com&icerik=dfsfmmfyunfyj HTTP/1.1" 200 3102
+True
+
+
+
+******************************************
+33. Django Forms ; Validations (Doğrulama) , Clean Method
+
+add_error
+
+
+
+
+
+******************************************
+34. Django Forms __init__ methodu ve widget özelliği Ders -1
+
+widget=forms.Select(attrs={'class':'form-control'})
+
+widget=forms.TextInput(attrs={'class':'form-control'})
+
+burda Select yaparak belli bir şeyi söylüyoruz bu önemli işe yarar!
+
+forms.py:
+
+class IletisimForm(forms.Form):
+    isim = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=50, label='İsim', required=False)
+    soyisim = forms.CharField(max_length=50, label='Soyisim', required=False)
+    email = forms.EmailField(max_length=70, label='E-mail', required=True)
+    email2 = forms.EmailField(max_length=70, label='E-mail Doğrulama', required=True)
+    icerik = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}), max_length=1000, label='İçerik')
+
+    def __init__(self, *args, **kwargs):
+
+        super(IletisimForm, self).__init__(*args, **kwargs)
+        # bu super çalışıtrıgımız zaman bunlara erişebiliyorum:
+        # self.fields bütün form elemanlarıma erişmeme yardımcı oluyor 
+        # şimdi IletisimForm'daki lerin widget larının attrs erişerek class form-control atıcam
+        for field in self.fields:
+            # field'da key geliyor!
+
+            # print(field)
+            # isim
+            # soyisim
+            # email
+            # email2
+            # icerik
+
+            # peki bunların value lerini nasıl çekicem
+            print(field ,self.fields[field])
+            # isim <django.forms.fields.CharField object at 0x7fdbde3ebcd0>
+            # soyisim <django.forms.fields.CharField object at 0x7fdbde3fad90>
+            # email <django.forms.fields.EmailField object at 0x7fdbde3fadf0>
+            # email2 <django.forms.fields.EmailField object at 0x7fdbde3fad60>
+            # icerik <django.forms.fields.CharField object at 0x7fdbde3fae80>
+
+            # bunu neden yapıyoruz: herbir elemanın widget'ının attrs 
+            self.fields[field].widget.attrs = {'class':'form-control'}
+
+
+******************************************
+35. Django Forms __init__ methodu ve widget özelliği Ders -2
+
+  isim = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=50, label='İsim', required=False)
+
+istersek böyle yazabiliriz istersekte init ve superi kullnarak!
+
+ 
+
+
+******************************************
+38. Django Model Form Kullanımı (CREATE) DERS -2
+
+eğer postumuzu post edeceksek csrf token yapmamız lazım!
+
+views.py 67. satır
+<QueryDict: {'csrfmiddlewaretoken': ['6nyIxe7eaidYMUIvyqUjq54HniEkr8TwPyd1E4F545cyFSN0x88ez4yt7tC8zERt'], 'title': ['asdasda'], 'content': ['dasdasdasdasd']}>
+[12/Jul/2020 22:49:14] "POST /posts/post-create/ HTTP/1.1" 200 2744
+
+
+
+
+******************************************
+41. get_object_or_404 Fonksiyonunun Kullanımı
+
+
+def post_detail(request, id):
+    try:
+        blog = Blog.objects.get(id=id)
+    except Blog.DoesNotExist:
+        #return HttpResponse('Böyle Bir Sayfa Bulunamadı..')
+        raise Http404
+
+böylede yazabiliriz birde 2. yol var:
+
+
+******************************************
+42. Viewlar Arasında Geçiş Yapma İşlemi
+
+HttpResponseRedirect: 
+  kendisinin aldıgı, kendisine gelen adresi, alarak o adrese yöneliyor
+
+
+******************************************
+43. get_absolute_url Methodu
+
+get_absolute_url: 
+
+
+******************************************
+44. Post Güncelleme İşlemi
+
+instance: 
+değeri vermezsen view.py de
+güncelleyecegin sayfanın yazısı gözükmüyor boş bir sayfa dönderiyor
+instance sil anlarsın!
+instance bir nesne aktardıgımız  için buda bir model form oldugu için
+model formun alanlarını kendisi aldı
+
+
+******************************************
+45. Post Silme İşlemi
+
+linebreaksbr: template, content alanına yazdık bu satır başına atladıgımızda 
+boşluk biraıktıgımızda göstermiyordu o işe yarıyor
+
+
+******************************************
+46. Django Messages Framework Ders-1
+
+
+
+
+
+
+******************************************
+47. Django Messages Framework Ders-2
+
+
+
+        <div class="row">
+            <div class="col-lg-8" style="float: none; margin:0 auto">
+                {% if messages %}
+                <div>
+                    {% for message in messages %}
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{ message|safe }}
+                        <!-- burda safe kullanmamızın sebebi views.deki stronları göstermek için -->
+                        <!-- safe: şu işi yapıyor, html tabanlı kodları kendi html yapısına çeviriyor -->
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+******************************************
+48. Slug Nedir , Slugify Methodunun Kullanımı
+
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py shell
+Python 3.8.2 (default, Apr 27 2020, 15:53:34) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.template.defaultfilters import slugify
+>>> deneme = "Merhaba Görkem"
+>>> deneme
+'Merhaba Görkem'
+>>> slugify(deneme)
+'merhaba-gorkem'
+>>> deneme = 'Bayram Görkem Doğan Rabia Polat'
+>>> slugify(deneme)
+'bayram-gorkem-dogan-rabia-polat'
+>>> deneme = 'Şehir çok güzel'
+>>> slugify(deneme)
+'sehir-cok-guzel'  burda gördügümüz gibi türkçe karakterleri değiştiriyor
+>>> deneme = 'İstanbul çok güzel'
+>>> slugify(deneme)
+'istanbul-cok-guzel'
+**** şimdide küçük 'ı' ile yapalım
+>>> deneme = 'ıstanbul çok güzel'
+>>> slugify(deneme)
+'stanbul-cok-guzel'
+**** burda göründügü gibi küçük ı yi göstermedi!
+**** bunun önüne geçebilmek için
+
+>>> deneme = deneme.replace('ı','i')
+>>> slugify(deneme)
+'istanbul-cok-guzel'
+
+2. yöntem:
+    pip install Unidecode
+    
+
+
+
+******************************************
+50. SlugField Unique Hatası
+
+sonlarında aynı başlıklı bir post ekledigimizde 
+IntegrityError at /posts/post-create/
+UNIQUE constraint failed: blog_blog.slug
+
+hatası alıyoruz...
+
+******************************************
+51. SlugField Unique Slug Çözüm
+
+mesala:
+
+bayram-görkem-dogan
+var diyelim tekrar aynısından oluşturdugumuzda hata alıyorduk unique hatası
+o yüzden sonlarına -1 ekliyecez
+mesela: 
+bayram-görkem-dogan-1
+bayram-görkem-dogan-2
+bayram-görkem-dogan-3
+....
+
+6. dk sonra 
+gorkem-dogan-rabia-polat-goktug-a-dogan-1-2/
+
+oluyor 1-2-3-4 gibi diyor bunu halledelim:
+
+
+
+******************************************
+52. SlugField Başlık Güncelleme
+
+başıgı güncelleyince güncellenmiyor bunuda yapalım:
+
+
+
+******************************************
+53. Many To Many Yapısına Giriş
+
+    yazdıgım gönderi birden fazla katagori içerebilir..
+    benim katogorimde birden fazla post'ada hitap edebilir
+
+
+
+******************************************
+54. Many To Many Kullanımı
+
+Teminalden:
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py shell
+Python 3.8.2 (default, Apr 27 2020, 15:53:34) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Blog,Kategori
+>>> b1 = Blog.objects.get(slug='python-nedir-1')
+>>> b1
+<Blog: Python Nedir ?>
+>>> k1 = Kategori.objects.get(isim='Python')
+>>> k1
+<Kategori: Python>
+
+>>> b1.kategoriler.add(k1)  #ekledik
+
+>>> b1.kategoriler
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x7f1298a50ee0>
+
+>>> b1.kategoriler.all()
+<QuerySet [<Kategori: Python>]>
+# yeni bir Kategori oluşturdu aynı zamanda b1 ekledi
+>>> b1.kategoriler.create(isim='bilisim')
+<Kategori: bilisim>
+>>> b1.kategoriler.all()
+<QuerySet [<Kategori: Python>, <Kategori: bilisim>]>
+
+# tüm kategorilerimize bakalım:
+>>> Kategori.objects.all()
+<QuerySet [<Kategori: Yazılım>, <Kategori: Python>, <Kategori: Django>, <Kategori: bilisim>]>
+
+>>> b2 = Blog.objects.get(slug='gorkem-dogan-rabia-polat-goktug-a-dogan')
+>>> b2
+<Blog: GÖRKEM DOĞAN RABIA POLAT GÖKTUG a DOGAN>
+
+>>> b2.kategoriler.all()
+<QuerySet []>
+# b2. kategorileri yok boş döndü!
+
+>>> k2 = Kategori.objects.get(id=2)
+>>> k2
+<Kategori: Python>
+>>> k2 = Kategori.objects.get(id=3)
+>>> k2
+<Kategori: Django>
+
+>>> b2.kategoriler.add(k1,k2)
+>>> b2.kategoriler.all()
+<QuerySet [<Kategori: Python>, <Kategori: Django>]>
+
+>>> b1.kategoriler.all()
+<QuerySet [<Kategori: Python>, <Kategori: bilisim>]>
+
+>>> b1.kategoriler.create(isim='Php')
+<Kategori: Php>
+
+>>> b1.kategoriler.all()
+<QuerySet [<Kategori: Python>, <Kategori: bilisim>, <Kategori: Php>]>
+
+# şimdi yapacagımız k1, katogorisinin hangi post'larda kullanıldıgına bakarsak
+>>> k1.blog_set.all()
+<QuerySet [<Blog: Python>, <Blog: Python Nedir ?>, <Blog: GÖRKEM DOĞAN RABIA POLAT GÖKTUG a DOGAN>]>
+
+# eğer blog_set yapmak istemezsek modelimizde kategoriler'e related_name='blog' olarak ekleme yapıcaz
+sonra tekrar terminal ekranımıza gidip:
+
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py shell
+Python 3.8.2 (default, Apr 27 2020, 15:53:34) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Kategori,Blog
+
+
+
+******************************************
+58. Resimleri Post List ve Post Detay Sayfasında Görüntüleme
+    burda image olmauyan posltara giremedik
+    template'imizde detailde 
+
+        {% if blog.image %}
+            <div class="thumbnail">
+                <img src="{{blog.image.url}}">
+            </div>
+        {% endif %}
+
+
+böyle yazabiliriz veya models.py içinde:
+
+def get_image(self):
+
+    if self.image:
+        return self.image.url
+
+    else:
+        return None
+
+
+
+******************************************
+59. Varsayılan Resim Görüntüleme
+
+truncatechars:200
+bu template gözükecek karakter sayısını söylüyor
+
+
+******************************************
+60. İçerik Alanının Doğrulanması (clean_icerik)
+
+blank= True: bu alan form'lardan geldigi zaman boş olabilir
+
+
+
+******************************************
+61. upload_to Özelliğini Kullanımı Ders -1
+
+upload_to fonk: media klasörü içinde dosyamızın
+ne şekilde yüklenecegini yani yolunu belirtiyoruz.
+
+image = models.ImageField(blank=True, default='default/python_django.jpg', upload_to='blog', verbose_name='Resim', null=True, help_text='Kapak Fotoğrafı Yükleyiniz')
+
+upload_to fonk. böyle yazabiliriz. başka bir yolu daha var?
+
+
+
+
+******************************************
+68. Bootstrap Kullanılarak Base.html Sayfamızı Düzenleme
+
+link : https://getbootstrap.com/docs/3.3/components/
+
+navbar-fixed-top var, bu navbarın aşagıya yukarıya gitsekde sabit kalmasını saglıyor
+
+Beyaz navbarımızı : siyaha çevirmek için
+
+navbar-default'u - navbar-inverse yaptık
+
+
+
+
+******************************************
+69. Arama İşlemi Ders -1
+ NAvbarımızda olan searc i kaldırıyoruz: base.html'den
+
+    <form class="navbar-form navbar-left">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Arama..">
+        </div>
+        <button type="submit" class="btn btn-default">Ara</button>
+    </form>
+
+
+
+
+
+
+
+******************************************
+72. Blog Modelimizi Sayfalama Ders -1
+
+
+    paginator = Paginator(posts,4) # burda 4 post bir sayfada olacak diyoruz.
+    posts = paginator.page(page) # bu page() içine template'den bir sayı gelecek o yüzden gelen sayıyı 39. satırdan alıcaz
+
+PAGİNATOR yaptık ama link'te page=3424 girdigimizde böyle sayfa olmadıgı için EmptyPage hatası aldık, sayısal bir deger yerine str girdigimizde 'WQEqweqw' GİBİ PageNotAnInteger hatası aldık
+o yüzden try except blogonu kullanıcaz:
+
+
+
+                    {% if posts.has_other_pages %}
+                    <ul class="pagination">
+                        {% if posts.has_previous %}
+                        <li><a href="?page={{ posts.previous_page_number }}"> &laquo;</a></li>
+                        {%else%}
+                        <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        <!--  -->
+                        {% for i in posts.paginator.page_range %}
+                        <!--  -->
+                        {% if posts.number == i %}
+                        <li class="active">
+                            <span>
+                                 {{i}}
+                                  <span class="sr-only">
+                                      (current)
+                                  </span>
+                            </span>
+                        </li>
+                        {%else%}
+                        <li><a href="?page={{i}}"> {{i}} </a></li>
+                        {% endif %}
+                        <!--  -->
+                        {% endfor %}
+                        <!--  -->
+                        {% if posts.has_next %}
+                        <li>
+                            <a href="?page={{ posts.next_page_number }}">&raquo;</a>
+                        </li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+
+
+
+
+
+**************************************
+76. CkEditor Kullanımı Ders-2
+
+truncatechars:250 demek 250 harf sayısı,
+truncatewords:250 demek 250 kelime,
+
+
+
+
+
+****************************************
+80. Yorum Sistemi Oluşturmak (Yorum Listeleme ) Ders-3
+
+
+
+
+
+
+
+from django.shortcuts import render, reverse, HttpResponseRedirect
+from .forms import *
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+
+def register(request):
+    form = RegisterForm(data=request.POST or None)
+    
+    if form.is_valid():
+        user = form.save(commit=False)
+        password = form.cleaned_data.get('password')
+        username = form.cleaned_data.get('username')
+        user.set_password(password)
+        user.save()
+        user = authenticate(username=username,password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                messages.success(request, 'Tebrikler Kaydınız Başarıyla Gerçekleşti.')
+
+                return HttpResponseRedirect(reverse('post-list'))
+                # reverse ile post-list sayfamıza yönlendirdik.
+
+    return render(request, 'auths/register.html', context={'form':form})
+
+
+
+
+
+****************************************
+90. User Login (With Login Email ) Ders -3
+
+bu derste login olurken hem username hemde email ile giriş yapma
+
+
+
+
+
+****************************************
+92. is_authenticated ve is_anonymous Fonksiyonlarının Kullanımı
+
+
+
+is_authenticated : true değeri döndürüyor kullanıcı giriş yaptıgında
+
+
+is_anonymous: ise false değeri döndürüyor authen.. tam tersi
+yani kimligi olmayan kişi girişi yapılmayan
+
+is_anonymous = not is_authenticated ### EŞİTTİR. anonymous kullanmıyalım.
+
+
+
+
+****************************************
+93. Decoratorler İle Çalışmak
+
+link : https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
+
+
+
+
+****************************************
+95. Anonymous Required Decorator
+
+sisteme giriş yapan kullanıcı, bir daha login syf. gitmemeli. register sayfasınada gitmemeli 7:00
+
+
+
+
+
+****************************************
+98. One To One Field Orm Örneği   shell ekranındayız
+
+(teoman) grkmdgn06@ubuntu:~/Desktop/teoman$ python manage.py shell
+Python 3.8.2 (default, Jul 16 2020, 14:00:26) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from auths.models import UserProfile
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.get(username='grkm')
+>>> profil = UserProfile.objects.create(user=user,gender='erkek')
+>>> user.profile
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'User' object has no attribute 'profile'
+>>> user.userprofile
+<UserProfile: Görkem DOĞAN Profil>
+>>> user.get_full_name()
+'Görkem DOĞAN'
+>>> user.userprofile.get_screen_name()
+'Görkem DOĞAN'
+
+
+
+
+****************************************
+99. Kullanıcı Profil Sayfası Ders-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
